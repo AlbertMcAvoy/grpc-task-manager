@@ -25,8 +25,8 @@ export const grpcConfig = (cs: ConfigService): GrpcOptions =>
 				  ])
 				: ServerCredentials.createInsecure(),
 			  loader: {
-				includeDirs: [join(__dirname, '../proto')],
+				includeDirs: [join(__dirname, '../../src/proto')],
 			  },
-			  protoPath: [join(__dirname, '../proto/media/v1alpha/service.proto')],
+			  protoPath: [join(__dirname, '../../src/proto/media/v1alpha/service.proto')],
 			},
 		  } as GrpcOptions);
