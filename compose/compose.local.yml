@@ -84,6 +84,7 @@ services:
       - USER_API_URL=user-api:4000
       - AUTH_API_URL=auth-api:4000
       - TASK_API_URL=task-api:4000
+      - MEDIA_API_URL=media-api:4000
       - JAEGER_URL=http://tracing:4318/v1/traces
     ports:
       - "3000:5173"

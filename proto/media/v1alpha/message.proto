@@ -6,13 +6,11 @@ message Media {
   int32 id = 1;
   string name = 2;
   string url = 3;
-  int32 user_id = 4;
 }
 
 message CreateMediaRequest {
   string name = 2;
   string url = 3;
-  int32 userId = 4;
 }
 
 message CreateMediaResponse {
@@ -48,7 +46,7 @@ message ListMediasRequest {
 }
 
 message ListMediasResponse {
-  // The field name should match the noun "Task" in the method name.
+  // The field name should match the noun "Media" in the method name.
   // There will be a maximum number of items returned based on the page_size field in the request.
   repeated Media medias = 1;
 

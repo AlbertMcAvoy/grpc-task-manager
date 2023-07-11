@@ -8,6 +8,7 @@ import {
 import fs from 'fs';
 import { UserServiceClient } from '$src/lib/stubs/user/v1alpha/service.client';
 import { AuthServiceClient } from '$src/lib/stubs/auth/v1alpha/service.client';
+import {MediaServiceClient} from "$src/lib/stubs/media/v1alpha/service.client";
 import { env } from '$env/dynamic/private';
 import { errorLoggerInterceptor, otelInterceptor } from './interceptor';
 import type { ServerStreamingCall, UnaryCall } from '@protobuf-ts/runtime-rpc';
@@ -60,6 +61,20 @@ const taskTransport = new GrpcTransport({
 	]
 });
 
+const mediaTransport = new GrpcTransport({
+	host: env.MEDIA_API_URL as string,
+	channelCredentials: credentials,
+	interceptors: [
+		{
+			interceptUnary: otelInterceptor<UnaryCall>(env.MEDIA_API_URL),
+			interceptServerStreaming: otelInterceptor<ServerStreamingCall>(env.MEDIA_API_URL)
+		},
+		{
+			interceptUnary: errorLoggerInterceptor
+		}
+	]
+})
+
 export const taskClients = {
 	crudClient: new TaskServiceClient(taskTransport),
 	fieldClient: new FieldServiceClient(taskTransport),
@@ -68,3 +83,5 @@ export const taskClients = {
 
 export const userClient = new UserServiceClient(userTransport);
 export const authClient = new AuthServiceClient(authTransport);
+
+export const mediaClients = new MediaServiceClient(mediaTransport);
