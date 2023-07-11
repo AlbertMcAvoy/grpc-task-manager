@@ -1,10 +1,19 @@
-import {
-	UpdateTaskRequest,
-	DeleteTaskRequest
-} from '$lib/stubs/task/v1beta/request';
-import { toPb } from '$lib/helper/taskDto';
 import { fail, type Actions } from '@sveltejs/kit';
 import { mediaClients } from '$src/lib/server/rpcClients';
+import {DeleteMediaRequest, ListMediasRequest, UpdateMediaRequest} from '$src/lib/stubs/media/v1alpha/message';
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = async () => {
+	const listMediaRequest = ListMediasRequest.create();
+	const request = await mediaClients.listMedias(listMediaRequest);
+	const listTasksResponse = request.response;
+
+	const medias = listTasksResponse.medias;
+
+	return {
+		medias
+	};
+};
 
 export const actions: Actions = {
 	newMedia: async ({ request, locals }) => {
@@ -35,15 +44,13 @@ export const actions: Actions = {
 		}
 	},
 
-	removeTask: async ({ request, locals }) => {
+	removeMedia: async ({ request }) => {
 		const data = await request.formData();
-		const taskName = data.get('taskName') as string;
-		const fieldName = data.get('fieldName') as string;
+		const mediaId = data.get('mediaId') as number;
 
 		try {
-			await taskClients.fieldClient.removeField({
-				fieldName,
-				taskName
+			await mediaClients.deleteMedia({
+				id: mediaId
 			});
 
 			return { success: true };
@@ -53,15 +60,17 @@ export const actions: Actions = {
 		}
 	},
 
-	updateTask: async ({ request, locals }) => {
+	updateMedia: async ({ request, }) => {
 		const data = await request.formData();
-		const stringTask = data.get('task') as string;
+		const name = data.get('name') as string;
+		const url = data.get('url') as string;
 
 		try {
-			const updateTaskRequest = UpdateTaskRequest.create({
-				task: toPb(JSON.parse(stringTask))
+			const updateMediaRequest = UpdateMediaRequest.create({
+				name,
+				url
 			});
-			await taskClients.crudClient.updateTask(updateTaskRequest);
+			await mediaClients.updateMedia(updateMediaRequest);
 
 			return { success: true };
 		} catch (error: any) {
@@ -70,15 +79,15 @@ export const actions: Actions = {
 		}
 	},
 
-	deleteTask: async ({ request, locals }) => {
+	deleteTask: async ({ request }) => {
 		const data = await request.formData();
-		const name = data.get('name') as any;
+		const mediaId = data.get('name') as number;
 
 		try {
-			const deleteTaskRequest = DeleteTaskRequest.create({
-				name
+			const deleteTaskRequest = DeleteMediaRequest.create({
+				id: mediaId
 			});
-			await taskClients.crudClient.deleteTask(deleteTaskRequest);
+			await mediaClients.deleteMedia(deleteTaskRequest);
 
 			return { success: true };
 		} catch (error: any) {

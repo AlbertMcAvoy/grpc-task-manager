@@ -27,10 +27,6 @@ export interface Media {
      * @generated from protobuf field: string url = 3;
      */
     url: string;
-    /**
-     * @generated from protobuf field: int32 user_id = 4;
-     */
-    userId: number;
 }
 /**
  * @generated from protobuf message media.v1alpha.CreateMediaRequest
@@ -44,10 +40,6 @@ export interface CreateMediaRequest {
      * @generated from protobuf field: string url = 3;
      */
     url: string;
-    /**
-     * @generated from protobuf field: int32 userId = 4;
-     */
-    userId: number;
 }
 /**
  * @generated from protobuf message media.v1alpha.CreateMediaResponse
@@ -126,7 +118,7 @@ export interface ListMediasRequest {
  */
 export interface ListMediasResponse {
     /**
-     * The field name should match the noun "Task" in the method name.
+     * The field name should match the noun "Media" in the method name.
      * There will be a maximum number of items returned based on the page_size field in the request.
      *
      * @generated from protobuf field: repeated media.v1alpha.Media medias = 1;
@@ -163,12 +155,11 @@ class Media$Type extends MessageType<Media> {
         super("media.v1alpha.Media", [
             { no: 1, name: "id", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "user_id", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+            { no: 3, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<Media>): Media {
-        const message = { id: 0, name: "", url: "", userId: 0 };
+        const message = { id: 0, name: "", url: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<Media>(this, message, value);
@@ -187,9 +178,6 @@ class Media$Type extends MessageType<Media> {
                     break;
                 case /* string url */ 3:
                     message.url = reader.string();
-                    break;
-                case /* int32 user_id */ 4:
-                    message.userId = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -212,9 +200,6 @@ class Media$Type extends MessageType<Media> {
         /* string url = 3; */
         if (message.url !== "")
             writer.tag(3, WireType.LengthDelimited).string(message.url);
-        /* int32 user_id = 4; */
-        if (message.userId !== 0)
-            writer.tag(4, WireType.Varint).int32(message.userId);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -230,12 +215,11 @@ class CreateMediaRequest$Type extends MessageType<CreateMediaRequest> {
     constructor() {
         super("media.v1alpha.CreateMediaRequest", [
             { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "userId", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+            { no: 3, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<CreateMediaRequest>): CreateMediaRequest {
-        const message = { name: "", url: "", userId: 0 };
+        const message = { name: "", url: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<CreateMediaRequest>(this, message, value);
@@ -251,9 +235,6 @@ class CreateMediaRequest$Type extends MessageType<CreateMediaRequest> {
                     break;
                 case /* string url */ 3:
                     message.url = reader.string();
-                    break;
-                case /* int32 userId */ 4:
-                    message.userId = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -273,9 +254,6 @@ class CreateMediaRequest$Type extends MessageType<CreateMediaRequest> {
         /* string url = 3; */
         if (message.url !== "")
             writer.tag(3, WireType.LengthDelimited).string(message.url);
-        /* int32 userId = 4; */
-        if (message.userId !== 0)
-            writer.tag(4, WireType.Varint).int32(message.userId);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

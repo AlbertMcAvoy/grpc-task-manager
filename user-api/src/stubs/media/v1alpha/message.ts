@@ -6,13 +6,11 @@ export interface Media {
   id?: number;
   name?: string;
   url?: string;
-  userId?: number;
 }
 
 export interface CreateMediaRequest {
   name?: string;
   url?: string;
-  userId?: number;
 }
 
 export interface CreateMediaResponse {
@@ -47,7 +45,7 @@ export interface ListMediasRequest {
 
 export interface ListMediasResponse {
   /**
-   * The field name should match the noun "Task" in the method name.
+   * The field name should match the noun "Media" in the method name.
    * There will be a maximum number of items returned based on the page_size field in the request.
    */
   medias?: Media[];

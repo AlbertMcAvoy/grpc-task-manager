@@ -8,7 +8,7 @@ import {
 import fs from 'fs';
 import { UserServiceClient } from '$src/lib/stubs/user/v1alpha/service.client';
 import { AuthServiceClient } from '$src/lib/stubs/auth/v1alpha/service.client';
-import {MediaServiceClient} from "$src/lib/stubs/media/v1alpha/service.client";
+import {MediaServiceClient} from '$src/lib/stubs/media/v1alpha/service.client';
 import { env } from '$env/dynamic/private';
 import { errorLoggerInterceptor, otelInterceptor } from './interceptor';
 import type { ServerStreamingCall, UnaryCall } from '@protobuf-ts/runtime-rpc';

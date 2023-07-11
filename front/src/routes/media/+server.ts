@@ -8,7 +8,8 @@ export const POST: RequestHandler = async ({request }) => {
 
 	try {
 		const updateMediaRequest = UpdateMediaRequest.create({
-			task: toPb(data)
+			name: data.name,
+			url: data.url
 		});
 		await mediaClients.updateMedia(updateMediaRequest);
 
