@@ -22,8 +22,8 @@
         </div>
 
         <div class="card-actions justify-end">
-            <form action="/media?/deleteMedia" method="POST" use:enhance>
-                <input value={media.id} name="name" hidden />
+            <form action="/media?/removeMedia" method="POST" use:enhance>
+                <input value={media.id} name="mediaId" hidden />
                 <button class="btn btn-warning text-base">Remove</button>
             </form>
         </div>

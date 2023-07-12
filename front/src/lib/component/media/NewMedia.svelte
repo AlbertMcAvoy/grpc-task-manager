@@ -8,7 +8,7 @@
 </script>
 
 <form
-	action="/task?/newMedia"
+	action="/media?/newMedia"
 	method="POST"
 	use:enhance={() => {
 		return async ({ result }) => {
@@ -29,10 +29,7 @@
 		</label>
 		<label class="input-group input-group-sm my-2">
 			<span class="w-24 p-2">Url</span>
-			<SveltyPicker
-				inputClasses="input input-bordered"
-				name="url"
-			/>
+			<input type="text" class="input input-bordered" name="url" />
 		</label>
 	</div>
 	<button class="btn btn-info btn-xs"> Create Media </button>

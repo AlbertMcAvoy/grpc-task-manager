@@ -8,11 +8,15 @@ export const load: PageLoad = async () => {
 	const request = await mediaClients.listMedias(listMediaRequest);
 	const listTasksResponse = request.response;
 
-	const medias = listTasksResponse.medias;
+	const medias = listTasksResponse.medias.map((m: { id: any; name: any; url: any; }) => {
+		return {
+			id: m.id,
+			name: m.name,
+			url: m.url
+		}
+	});
 
-	return {
-		medias
-	};
+	return { medias };
 };
 
 export const actions: Actions = {
@@ -46,7 +50,7 @@ export const actions: Actions = {
 
 	removeMedia: async ({ request }) => {
 		const data = await request.formData();
-		const mediaId = data.get('mediaId') as number;
+		const mediaId = data.get('mediaId');
 
 		try {
 			await mediaClients.deleteMedia({

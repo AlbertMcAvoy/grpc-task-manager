@@ -63,7 +63,7 @@ const taskTransport = new GrpcTransport({
 
 const mediaTransport = new GrpcTransport({
 	host: env.MEDIA_API_URL as string,
-	channelCredentials: credentials,
+	channelCredentials: ChannelCredentials.createInsecure(),
 	interceptors: [
 		{
 			interceptUnary: otelInterceptor<UnaryCall>(env.MEDIA_API_URL),
