@@ -18,8 +18,9 @@ message CreateMediaResponse {
 }
 
 message UpdateMediaRequest {
-  string name = 1;
-  string url = 2;
+  int32 id = 1;
+  string name = 2;
+  string url = 3;
 }
 
 message UpdateMediaResponse {
@@ -55,7 +56,7 @@ message ListMediasResponse {
 }
 
 message GetMediaRequest {
-  string name = 1;
+  int32 id = 1;
 }
 
 message GetMediaResponse {

@@ -3,44 +3,49 @@
 export const protobufPackage = "media.v1alpha";
 
 export interface Media {
-  id?: number;
-  name?: string;
-  url?: string;
+  id?: number | undefined;
+  name?: string | undefined;
+  url?: string | undefined;
 }
 
 export interface CreateMediaRequest {
-  name?: string;
-  url?: string;
+  name?: string | undefined;
+  url?: string | undefined;
 }
 
 export interface CreateMediaResponse {
-  media?: Media;
+  media?: Media | undefined;
 }
 
 export interface UpdateMediaRequest {
-  name?: string;
-  url?: string;
+  id?: number | undefined;
+  name?: string | undefined;
+  url?: string | undefined;
 }
 
 export interface UpdateMediaResponse {
-  media?: Media;
+  media?: Media | undefined;
 }
 
 export interface DeleteMediaRequest {
-  id?: number;
+  id?: number | undefined;
 }
 
 export interface DeleteMediaResponse {
-  media?: Media;
+  media?: Media | undefined;
 }
 
 export interface ListMediasRequest {
   /** The parent resource name, for example, "shelves/shelf1" */
-  parent?: string;
+  parent?:
+    | string
+    | undefined;
   /** The maximum number of items to return. */
-  pageSize?: number;
+  pageSize?:
+    | number
+    | undefined;
   /** The next_page_token value returned from a previous List request, if any. */
-  pageToken?: string;
+  pageToken?: string | undefined;
 }
 
 export interface ListMediasResponse {
@@ -48,17 +53,19 @@ export interface ListMediasResponse {
    * The field name should match the noun "Media" in the method name.
    * There will be a maximum number of items returned based on the page_size field in the request.
    */
-  medias?: Media[];
+  medias?:
+    | Media[]
+    | undefined;
   /** Token to retrieve the next page of results, or empty if there are no more results in the list. */
-  nextPageToken?: string;
+  nextPageToken?: string | undefined;
 }
 
 export interface GetMediaRequest {
-  name?: string;
+  id?: number | undefined;
 }
 
 export interface GetMediaResponse {
-  media?: Media;
+  media?: Media | undefined;
 }
 
 export const MEDIA_V1ALPHA_PACKAGE_NAME = "media.v1alpha";

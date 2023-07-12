@@ -55,11 +55,15 @@ export interface CreateMediaResponse {
  */
 export interface UpdateMediaRequest {
     /**
-     * @generated from protobuf field: string name = 1;
+     * @generated from protobuf field: int32 id = 1;
+     */
+    id: number;
+    /**
+     * @generated from protobuf field: string name = 2;
      */
     name: string;
     /**
-     * @generated from protobuf field: string url = 2;
+     * @generated from protobuf field: string url = 3;
      */
     url: string;
 }
@@ -136,9 +140,9 @@ export interface ListMediasResponse {
  */
 export interface GetMediaRequest {
     /**
-     * @generated from protobuf field: string name = 1;
+     * @generated from protobuf field: int32 id = 1;
      */
-    name: string;
+    id: number;
 }
 /**
  * @generated from protobuf message media.v1alpha.GetMediaResponse
@@ -315,12 +319,13 @@ export const CreateMediaResponse = new CreateMediaResponse$Type();
 class UpdateMediaRequest$Type extends MessageType<UpdateMediaRequest> {
     constructor() {
         super("media.v1alpha.UpdateMediaRequest", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "url", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<UpdateMediaRequest>): UpdateMediaRequest {
-        const message = { name: "", url: "" };
+        const message = { id: 0, name: "", url: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<UpdateMediaRequest>(this, message, value);
@@ -331,10 +336,13 @@ class UpdateMediaRequest$Type extends MessageType<UpdateMediaRequest> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string name */ 1:
+                case /* int32 id */ 1:
+                    message.id = reader.int32();
+                    break;
+                case /* string name */ 2:
                     message.name = reader.string();
                     break;
-                case /* string url */ 2:
+                case /* string url */ 3:
                     message.url = reader.string();
                     break;
                 default:
@@ -349,12 +357,15 @@ class UpdateMediaRequest$Type extends MessageType<UpdateMediaRequest> {
         return message;
     }
     internalBinaryWrite(message: UpdateMediaRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string name = 1; */
+        /* int32 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).int32(message.id);
+        /* string name = 2; */
         if (message.name !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.name);
-        /* string url = 2; */
+            writer.tag(2, WireType.LengthDelimited).string(message.name);
+        /* string url = 3; */
         if (message.url !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.url);
+            writer.tag(3, WireType.LengthDelimited).string(message.url);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -625,11 +636,11 @@ export const ListMediasResponse = new ListMediasResponse$Type();
 class GetMediaRequest$Type extends MessageType<GetMediaRequest> {
     constructor() {
         super("media.v1alpha.GetMediaRequest", [
-            { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 1, name: "id", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
         ]);
     }
     create(value?: PartialMessage<GetMediaRequest>): GetMediaRequest {
-        const message = { name: "" };
+        const message = { id: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<GetMediaRequest>(this, message, value);
@@ -640,8 +651,8 @@ class GetMediaRequest$Type extends MessageType<GetMediaRequest> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string name */ 1:
-                    message.name = reader.string();
+                case /* int32 id */ 1:
+                    message.id = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -655,9 +666,9 @@ class GetMediaRequest$Type extends MessageType<GetMediaRequest> {
         return message;
     }
     internalBinaryWrite(message: GetMediaRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string name = 1; */
-        if (message.name !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.name);
+        /* int32 id = 1; */
+        if (message.id !== 0)
+            writer.tag(1, WireType.Varint).int32(message.id);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
