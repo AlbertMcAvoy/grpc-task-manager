@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MediaController } from './media.controller';
+import { MediaService } from './media.service';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
-import { envSchema } from './config/env'
+import { envSchema } from './config/env';
 import { GrpcReflectionModule } from 'nestjs-grpc-reflection';
 import { grpcConfig } from './config/grpc.option';
+import { PrismaService } from './prisma.service';
 
 @Module({
   imports: [
@@ -13,13 +14,13 @@ import { grpcConfig } from './config/grpc.option';
       ignoreEnvFile: process.env.NODE_ENV === 'production',
       validationSchema: envSchema,
     }),
-		GrpcReflectionModule.registerAsync({
-	      imports: [ConfigModule],
-	      useFactory: (cs: ConfigService) => grpcConfig(cs),
-	      inject: [ConfigService],
-	    }),
+    GrpcReflectionModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (cs: ConfigService) => grpcConfig(cs),
+    }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [MediaController],
+  providers: [MediaService, PrismaService],
 })
 export class AppModule {}

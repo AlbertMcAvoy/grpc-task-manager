@@ -18,6 +18,7 @@ export interface CreateMediaResponse {
 }
 
 export interface UpdateMediaRequest {
+  id: number;
   name: string;
   url: string;
 }
@@ -54,7 +55,7 @@ export interface ListMediasResponse {
 }
 
 export interface GetMediaRequest {
-  name: string;
+  id: number;
 }
 
 export interface GetMediaResponse {
