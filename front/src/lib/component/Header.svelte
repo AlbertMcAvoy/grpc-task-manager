@@ -10,6 +10,7 @@
 	import Login from './auth/Login.svelte';
 	import Logout from './auth/Logout.svelte';
 	import { page } from '$app/stores';
+	import NewMedia from "./media/NewMedia.svelte";
 
 	export let headerHeight;
 
@@ -27,6 +28,10 @@
 	const handleNewTask = () => {
 		sendUsage(EventType.CREATE, '');
 		modal.open(NewTask as any);
+	};
+
+	const handleNewMedia = () => {
+		modal.open(NewMedia as any);
 	};
 
 	const handleSession = () => {
@@ -157,7 +162,11 @@
 					<FaUserSecret />
 				{/if}
 			</button>
-			<button class="btn btn-primary btn-square" on:click={handleNewTask}>+</button>
+			{#if $page.url.pathname && $page.url.pathname === '/media'}
+				<button class="btn btn-primary btn-square" on:click={handleNewMedia}>+</button>
+			{:else}
+				<button class="btn btn-primary btn-square" on:click={handleNewTask}>+</button>
+			{/if}
 		</div>
 	</div>
 </div>

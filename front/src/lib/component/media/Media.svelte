@@ -16,7 +16,7 @@
         <div class="stats stats-vertical shadow pb-2 text-xl overflow-y-auto h-full">
             <div class="flex justify-between items-center pr-2">
                 <div class="stat">
-                    <div class="stat-desc">{media.url}</div>
+                    <iframe src="{media.url}"></iframe>
                 </div>
             </div>
         </div>

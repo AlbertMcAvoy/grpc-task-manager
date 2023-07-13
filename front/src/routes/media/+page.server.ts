@@ -48,22 +48,6 @@ export const actions: Actions = {
 		}
 	},
 
-	removeMedia: async ({ request }) => {
-		const data = await request.formData();
-		const mediaId = data.get('mediaId');
-
-		try {
-			await mediaClients.deleteMedia({
-				id: mediaId
-			});
-
-			return { success: true };
-		} catch (error: any) {
-			console.error(error);
-			return fail(400, { error: error?.message || 'something went wront' });
-		}
-	},
-
 	updateMedia: async ({ request, }) => {
 		const data = await request.formData();
 		const name = data.get('name') as string;
@@ -83,15 +67,15 @@ export const actions: Actions = {
 		}
 	},
 
-	deleteTask: async ({ request }) => {
+	removeMedia: async ({ request }) => {
 		const data = await request.formData();
-		const mediaId = data.get('name') as number;
+		const id = data.get('mediaId') as number;
 
 		try {
-			const deleteTaskRequest = DeleteMediaRequest.create({
-				id: mediaId
+			const deleteMediaRequest = DeleteMediaRequest.create({
+				id: +id
 			});
-			await mediaClients.deleteMedia(deleteTaskRequest);
+			await mediaClients.deleteMedia(deleteMediaRequest);
 
 			return { success: true };
 		} catch (error: any) {
